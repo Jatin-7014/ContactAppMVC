@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (User.IsInRole("Admin"))
+{
+    <h2>Welcome to the Admin Page</h2>
+}
+
+@if (User.IsInRole("Staff"))
+{
+    <div class="container listItems">
+        <h2>Welcome to Staff Page</h2>
+        <p>
+            <button type="button" class="btn btn-outline-success" id="btnAdd">
+                Add New Contact
+            </button>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        First Name
+                    </th>
+                    <th>
+                        Last Name
+                    </th>
+                    <th>
+                        IsActive
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody id="tblBody">
+            </tbody>
+        </table>
+    </div>
+
+    <div style="display:none" class="container" id="newRecord">
+        @Html.Partial("_AddRecordPartial")
+    </div>
+    
+    <div style="display:none" class="container" id="editRecord">
+        @Html.Partial("_EditRecordPartial")
+    </div>
+    <script src="~/Scripts/MyCrud.js"></script>
+    <script>
+        $(document).ready(() => {
+            loadItems();
+        })
+    </script>
+}
+
